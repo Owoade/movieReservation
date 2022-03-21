@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./booking.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Payment</title>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+<link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+		rel="stylesheet">
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-card">
+            <h1><a class="navbar-brand" href="index.php"><span class="fa fa-play icon-log"
+                aria-hidden="true"></span>
+            MoviePoint </a></h1>
+            <form id="paymentForm">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email-address" required />
+                </div>
+                <div class="form-group">
+                    <label for="">Movie name</label>
+                     <select  name="movie" class="movie-name" id="movie-name"  required>
+                    <option value="">Select Movie</option>
+                    <option value="Avengers">Avengers</option>
+                    <option value="Bad Boys for Life">Bad Boys for Life</option>
+                    <option value="FrozenII">FrozenII</option>
+                    <option value="Joker">Joker</option>
+                    <option value="Mulan">Mulan</option>
+                    <option value="My Spy">My Spy</option>
+                    <option value="Scoob">Scoob</option>
+                    <option value="Downhill">Downhill</option>
+                    <option value="No Time to Die">No Time to Die</option>
+                    <option value="Free guy">Free guy</option>
+                    <option value="Jumanji:Next Level">Jumanji:Next Level</option>
+                    <option value="Dolittle">Dolittle</option>
+                </select>
+                </div>
+               
+                <div class="form-group">
+                  <label for="amount" >Amount</label>
+                  <input type="tel" id="amount" required value="100" readonly />
+                </div>
+                <div class="form-group">
+                  <label for="first-name">First Name</label>
+                  <input type="text" id="first-name" />
+                </div>
+                <div class="form-group">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" id="last-name" />
+                </div>
+                <div class="form-submit">
+                  <button type="submit" onclick="payWithPaystack()"> Pay </button>
+                </div>
+              </form>
+              
+        </div>
+        
+    </div>
+</body>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener("submit", payWithPaystack, false);
+function payWithPaystack(e) {
+  e.preventDefault();
+  let handler = PaystackPop.setup({
+    key: 'pk_test_f094147f9582011ce24f0dae8cae84b07e7143f3', // Replace with your public key
+    email: document.getElementById("email-address").value,
+    amount: document.getElementById("amount").value * 100,
+    ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+    // label: "Optional string that replaces customer email"
+    onClose: function(){
+      alert('Window closed.');
+    },
+    callback: function(response){
+        const email = document.getElementById("email-address").value;
+        const fullName = `${document.getElementById("first-name").value} ${document.getElementById("last-name").value}`
+        const amount = document.getElementById("amount").value;
+        const movie_name = document.getElementById("movie-name").value;
+       location.replace(`reciept.php?email=${email}&&amount=${amount}&&movie_name=${movie_name}&&fullname=${fullName}&&status=${response.message}&&ref=${response.trxref}`)
+    }
+  });
+  handler.openIframe();
+}
+</script>
+<style>
+    body{
+        background-color: rgb(204, 204, 204);
+    }
+    .payment-card,.payment-reciept{
+        width: 400px;
+        margin: 2em auto;
+        background-color: white;
+        padding: 1em 2em;
+        border-radius: 20px;
+    }
+    .payment-card h1,.payment-reciept{
+        text-align: center;
+    }
+    .payment-card select{
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+    }
+    .payment-card option{
+        background-color: transparent;
+    }
+    .payment-card form {
+        margin: 2em 0;
+    }
+    .form-group{
+        margin: 1em 0;
+    }
+    .form-group *{
+        display: block;
+    }
+    .form-group input{
+        width: 100%;
+        border:none;
+        border-bottom: 1px solid black;
+    }
+    .form-submit button {
+        width: 100%;
+        display: block;
+        background-color: #e83e8c;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: .5em 0;
+        margin: 1em 0;
+    }
+
+</style>
+</html>

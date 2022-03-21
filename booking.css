@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url(fineee.jpg);
+    background-position: center;
+    background-size: cover;
+
+}
+a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 2rem;
+}
+.bb{
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+    margin-top: 2rem;
+}
+
+#form{
+    background-color: #000;
+    height: 400px;
+    width: 800px;
+    margin: auto;
+    margin-top: 100px;
+    opacity: 0.7;
+}
+#first-group{
+    border: none;
+    width: 400px;
+    margin-top: 38px;
+    position: absolute;
+}
+#content{
+    border: 1px solid #fff;
+    margin: 10px;
+    margin-left: 8px;
+    padding: 5px;
+}
+#content #input-group{
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 8px;
+    width: 300px;
+    color: #fff;
+}
+#content #input-time{
+    background-color: rgba(255, 255, 255, 0.24);
+    margin-left: 8px;
+    width: 305px;
+}
+#content #input-date{
+    background-color: rgba(255, 255, 255, 0.24);
+    margin-left: 8px;
+    width: 305px;
+}
+::placeholder{
+    color: #fff;
+}
+#second-group{
+    border: none;
+    width: 400px;
+    margin-top: 48px;
+    margin-left: 400px;
+}
+#submit-btn{
+    margin-top: 50px;
+    margin-left: 350px;
+    background: transparent;
+    color: #fff;
+    width: 150px;
+    border: 1px solid red;
+    border-radius: 100px;
+    outline: none;
+    padding: 10px;
+    font-size: 20px;
+}
